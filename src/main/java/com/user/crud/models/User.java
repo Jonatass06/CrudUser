@@ -16,8 +16,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(mappedBy = "user")
-    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
     private MyUserDetailsEntity myUserDetailsEntity;
     private String name;
     private Integer age;

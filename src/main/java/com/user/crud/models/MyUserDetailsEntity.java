@@ -1,5 +1,6 @@
 package com.user.crud.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
@@ -10,21 +11,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 
-@RequiredArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Data
-
+@Builder
 public class MyUserDetailsEntity implements UserDetails{
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
-    @NonNull
+    @OneToOne(mappedBy = "myUserDetailsEntity")
+    @JsonIgnore
     private User user;
-    private GrantedAuthority authorities;
+    private Collection<Authorization> authorities;
     private boolean accountNonExpired = true;
     private boolean accountNonLocked = true;
     private boolean credentialsNonExpired = true;
@@ -32,8 +33,7 @@ public class MyUserDetailsEntity implements UserDetails{
     @Column(nullable = false)
     @Length(min = 6)
     private String password;
-    @Email
-    @Column(unique = true, updatable = false)
+    @Column(unique = true, updatable = false, nullable = false)
     private String username;
 
 }

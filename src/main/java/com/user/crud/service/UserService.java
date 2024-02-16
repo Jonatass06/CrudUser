@@ -12,6 +12,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.beans.Transient;
 import java.util.Collection;
 
 @AllArgsConstructor
@@ -42,7 +43,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User updateUser(UserUpdateDTO userDTO){
+    public User updateUser(User userDTO){
         User user = userRepository.findById(userDTO.getId()).get();
         modelMapper.map(userDTO, user);
         return userRepository.save(user);
@@ -50,7 +51,7 @@ public class UserService {
 
     public User updatePassword(Long id, String password){
         User user = userRepository.findById(id).get();
-        user.setPassword(password);
+        user.getMyUserDetailsEntity().setPassword(password);
         return userRepository.save(user);
     }
 

@@ -2,6 +2,7 @@ package com.user.crud.controller;
 
 import com.user.crud.models.User;
 import com.user.crud.models.dtos.UserUpdateDTO;
+import com.user.crud.service.AuthenticationService;
 import com.user.crud.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +17,18 @@ public class UserController {
 
     private UserService userService;
 
-    @PostMapping
-    public User saveUser(@RequestAttribute String user, @RequestBody MultipartFile picture){
+    @PostMapping("/image")
+    public User saveUser(@RequestParam String user, @RequestParam MultipartFile picture){
         return userService.saveUser(user, picture);
     }
 
+    @PostMapping
+    public User saveUser( @RequestBody User user){
+        return null;
+    }
+
     @PutMapping
-    public User updateUser(@RequestBody UserUpdateDTO user){
+    public User updateUser(@RequestBody User user){
         return userService.updateUser(user);
     }
 
@@ -52,7 +58,7 @@ public class UserController {
     }
 
     @PatchMapping("/{id}/picture")
-    public User updatePicture(@PathVariable Long id, @RequestBody MultipartFile picture){
+    public User updatePicture(@PathVariable Long id, @RequestParam MultipartFile picture){
         return userService.updatePicture(id, picture);
     }
 
