@@ -35,6 +35,7 @@ public class FilterAuth extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
+        if(!publicRequest(request)){
         //Busca e valida o token
         Cookie cookie = cookieUtil.getCookie(request, "JWT");
         String token = cookie.getValue();
@@ -50,12 +51,12 @@ public class FilterAuth extends OncePerRequestFilter {
         context.setAuthentication(authentication);
         // Salva o contexto na repository
         securityContextRepository.saveContext(context, request, response);
-
+        }
         //Continua a requisição
         filterChain.doFilter(request, response);
     }
 
-    private Boolean piblicRequest(HttpServletRequest request){
+    private Boolean publicRequest(HttpServletRequest request){
         return request.getRequestURI().equals("/login") && request.getMethod().equals("POST");
 
     }
