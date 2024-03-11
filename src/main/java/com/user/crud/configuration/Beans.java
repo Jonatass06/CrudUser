@@ -3,15 +3,11 @@ package com.user.crud.configuration;
 import com.user.crud.service.AuthenticationService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,7 +16,7 @@ import org.springframework.security.web.context.SecurityContextRepository;
 
 @AllArgsConstructor
 @Configuration
-public class BeanConfigs {
+public class Beans {
 
     private final AuthenticationService authenticationService;
 
@@ -31,11 +27,11 @@ public class BeanConfigs {
         return modelMapper;
     }
 
-//    @Bean
-//    public PasswordEncoder passwordEncoder() {
-//        return NoOpPasswordEncoder.getInstance();
-//    }
-//
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Bean
     SecurityContextRepository securityContextRepository() {
         return new HttpSessionSecurityContextRepository();
@@ -44,7 +40,7 @@ public class BeanConfigs {
     @Bean
     public AuthenticationManager authenticationManager( )  {
         DaoAuthenticationProvider dao = new DaoAuthenticationProvider();
-        dao.setPasswordEncoder(new BCryptPasswordEncoder());
+//        dao.setPasswordEncoder(new BCryptPasswordEncoder());
         dao.setUserDetailsService(authenticationService);
         return new ProviderManager(dao);
 

@@ -7,13 +7,14 @@ import com.user.crud.repository.UserRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
 @AllArgsConstructor
-public class DatabaseConfig {
+public class Database {
     private final UserRepository userRepository;
 
     @PostConstruct
@@ -21,10 +22,11 @@ public class DatabaseConfig {
 
         User user = new User();
         user.setName("mi72");
+        user.setName(("Teste"));
         user.setMyUserDetailsEntity(
                 MyUserDetailsEntity.builder()
                         .username("teste")
-                        .password("teste123")
+                        .password(new BCryptPasswordEncoder().encode("teste123"))
                         .accountNonExpired(true)
                         .accountNonLocked(true)
                         .credentialsNonExpired(true)

@@ -24,6 +24,4 @@ public class User {
     private Boolean isActive = true;
     @OneToOne(cascade = CascadeType.ALL)
     private Archive picture;
-
-
 }
