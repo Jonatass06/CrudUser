@@ -27,14 +27,14 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
 
-    private final SecurityContextRepository securityContextRepository;
+
     private final CookieUtil cookieUtil = new CookieUtil();
     @PatchMapping("/login")
     public ResponseEntity<String> authenticate(@RequestBody UserLogin userLogin, HttpServletRequest request,
                                                HttpServletResponse response) {
         try {
             // Cria um token de autenticação
-            UsernamePasswordAuthenticationToken authenticationToke =
+            Authentication authenticationToke =
                     new UsernamePasswordAuthenticationToken(userLogin.getUsername(), userLogin.getPassword());
             // Autentica o usuario usando os aitenticação providers
             Authentication authentication = authenticationManager.authenticate(authenticationToke);

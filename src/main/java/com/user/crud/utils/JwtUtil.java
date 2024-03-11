@@ -1,9 +1,6 @@
 package com.user.crud.utils;
 
-import io.jsonwebtoken.Jwt;
-import io.jsonwebtoken.JwtParser;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Date;
 
@@ -24,12 +21,11 @@ public class JwtUtil{
     private JwtParser getParser(){
         return Jwts.parser().setSigningKey("/#mortandelaComQueijo#/").build();
     }
-    public void validateToken(String token){
-
-        getParser().parseClaimsJws(token);
+    private Jws<Claims> validateToken(String token){
+        return getParser().parseClaimsJws(token);
     }
 
     public String getUsername(String token) {
-        return getParser().parseClaimsJws(token).getPayload().getSubject();
+        return validateToken(token).getPayload().getSubject();
     }
 }
