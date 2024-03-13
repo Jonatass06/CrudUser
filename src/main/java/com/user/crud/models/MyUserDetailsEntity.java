@@ -24,6 +24,7 @@ public class MyUserDetailsEntity implements UserDetails{
     private Long id;
     @OneToOne(mappedBy = "myUserDetailsEntity")
     @JsonIgnore
+    @ToString.Exclude
     private User user;
     private Collection<Authorization> authorities;
     private boolean accountNonExpired = true;

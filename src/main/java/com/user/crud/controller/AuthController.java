@@ -18,6 +18,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @RestController
 @AllArgsConstructor
 public class AuthController {
@@ -47,10 +49,20 @@ public class AuthController {
             UserDetails user = (UserDetails) authentication.getPrincipal();
             Cookie cookie = cookieUtil.generateCookieJwt(user);
             response.addCookie(cookie);
-
             return ResponseEntity.ok("User authenticated");
         } catch (AuthenticationException e) {
             return ResponseEntity.status(401).body("Invalid username or password");
+        }
+    }
+
+    @PostMapping("/logout")
+    public void logout (HttpServletRequest request, HttpServletResponse response){
+        try {
+            Cookie cookie = cookieUtil.getCookie(request, "JWT");
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+        } catch (Exception e) {
+            response.setStatus(401);
         }
     }
 }

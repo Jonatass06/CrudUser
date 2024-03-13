@@ -33,8 +33,8 @@ import java.util.ArrayList;
 @Configuration
 public class Security{
 
-    private final SecurityContextRepository repo;
     private final FilterAuth filter;
+    private final SecurityContextRepository repo;
     //@Bean
     //public UserDetailsManager inMemoryUser(){
     //    UserDetails user = User.withDefaultPasswordEncoder()
@@ -53,23 +53,24 @@ public class Security{
     @Bean
     public SecurityFilterChain config(HttpSecurity http) throws Exception {
 //      CSRF garante que realmente a requisição veio do cliente que está fazendo a requisição e não um invasor
-        http.csrf(AbstractHttpConfigurer::disable);
         http.authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
 //                              .requestMatchers(HttpMethod.GET, "/user").hasAuthority("Get")
 //                              .requestMatchers(HttpMethod.GET, "/user").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/user").hasAuthority("GET")
+                                .requestMatchers(HttpMethod.GET, "/user/**").hasAuthority("GET")
+//                                .requestMatchers(HttpMethod.GET, "/user/**").hasAnyAuthority("GET", "POST", "PUT", "DELETE")
                                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
 //                              .requestMatchers(HttpMethod.POST, "/user/**").authenticated()
 //                              .requestMatchers( "/user/**").permitAll()
                                 .anyRequest().authenticated()
         );
-//        http.securityContext(context -> context.securityContextRepository(repo));
-        http.formLogin(AbstractHttpConfigurer::disable);
-        http.logout(Customizer.withDefaults());
+        http.securityContext(context -> context.securityContextRepository(repo));
         http.sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-//      http.httpBasic(Customizer.withDefaults());
+        http.formLogin(AbstractHttpConfigurer::disable);
+        http.logout(AbstractHttpConfigurer::disable);
+        http.csrf(AbstractHttpConfigurer::disable);
+//      http.httpBasic(Customizer.withDefaults());]
         return http.build();
     }
 
