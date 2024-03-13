@@ -16,9 +16,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.context.SecurityContextRepository;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -26,12 +24,12 @@ public class AuthController {
 
 
     private final AuthenticationManager authenticationManager;
-
-
     private final CookieUtil cookieUtil = new CookieUtil();
-    @PatchMapping("/login")
+
+    @PostMapping("/login")
     public ResponseEntity<String> authenticate(@RequestBody UserLogin userLogin, HttpServletRequest request,
                                                HttpServletResponse response) {
+
         try {
             // Cria um token de autenticação
             Authentication authenticationToke =

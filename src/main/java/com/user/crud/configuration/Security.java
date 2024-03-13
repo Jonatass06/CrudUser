@@ -59,12 +59,13 @@ public class Security{
 //                              .requestMatchers(HttpMethod.GET, "/user").hasAuthority("Get")
 //                              .requestMatchers(HttpMethod.GET, "/user").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/user").hasAuthority("GET")
+                                .requestMatchers(HttpMethod.POST, "/login").permitAll()
 //                              .requestMatchers(HttpMethod.POST, "/user/**").authenticated()
 //                              .requestMatchers( "/user/**").permitAll()
                                 .anyRequest().authenticated()
         );
 //        http.securityContext(context -> context.securityContextRepository(repo));
-        http.formLogin(Customizer.withDefaults());
+        http.formLogin(AbstractHttpConfigurer::disable);
         http.logout(Customizer.withDefaults());
         http.sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);

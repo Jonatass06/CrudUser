@@ -58,6 +58,5 @@ public class FilterAuth extends OncePerRequestFilter {
 
     private Boolean publicRequest(HttpServletRequest request){
         return request.getRequestURI().equals("/login") && request.getMethod().equals("POST");
-
     }
 }
