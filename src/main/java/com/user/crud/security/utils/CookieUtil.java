@@ -1,4 +1,4 @@
-package com.user.crud.utils;
+package com.user.crud.security.utils;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,8 +1,6 @@
 package com.user.crud.controller;
 
 import com.user.crud.models.User;
-import com.user.crud.models.dtos.UserUpdateDTO;
-import com.user.crud.service.AuthenticationService;
 import com.user.crud.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

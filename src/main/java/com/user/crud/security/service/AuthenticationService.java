@@ -1,6 +1,5 @@
-package com.user.crud.service;
+package com.user.crud.security.service;
 
-import com.user.crud.models.MyUserDetailsEntity;
 import com.user.crud.models.User;
 import com.user.crud.repository.UserRepository;
 import lombok.AllArgsConstructor;

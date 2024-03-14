@@ -1,7 +1,7 @@
 package com.user.crud.configuration;
 
-import com.user.crud.models.Authorization;
-import com.user.crud.models.MyUserDetailsEntity;
+import com.user.crud.security.model.enums.Authorization;
+import com.user.crud.security.model.entity.MyUserDetailsEntity;
 import com.user.crud.models.User;
 import com.user.crud.repository.UserRepository;
 import jakarta.annotation.PostConstruct;

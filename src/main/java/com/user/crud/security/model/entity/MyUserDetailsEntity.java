@@ -1,11 +1,11 @@
-package com.user.crud.models;
+package com.user.crud.security.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.user.crud.security.model.enums.Authorization;
+import com.user.crud.models.User;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;

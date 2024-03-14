@@ -1,4 +1,4 @@
-package com.user.crud.utils;
+package com.user.crud.security.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;

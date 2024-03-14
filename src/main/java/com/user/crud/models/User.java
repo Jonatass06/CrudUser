@@ -1,11 +1,10 @@
 package com.user.crud.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.user.crud.security.model.entity.MyUserDetailsEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @AllArgsConstructor
 @Entity

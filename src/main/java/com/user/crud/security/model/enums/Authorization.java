@@ -1,4 +1,4 @@
-package com.user.crud.models;
+package com.user.crud.security.model.enums;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package com.user.crud.models.dtos;
+package com.user.crud.security.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
